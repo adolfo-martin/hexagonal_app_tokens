@@ -1,0 +1,43 @@
+GET http://127.0.0.1:5000/api/users
+
+###
+
+GET http://127.0.0.1:5000/api/user/759804a1-729d-46f2-a625-0882638ba38c
+
+###
+
+POST http://127.0.0.1:5000/api/user
+content-type: application/x-www-form-urlencoded
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4uY2FuYWxlcyIsInJlbW90ZUFkZHJlc3MiOiI6OmZmZmY6MTI3LjAuMC4xIiwidHlwZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2Mjc0OTUzNTUsImV4cCI6MTYyNzU3OTM1NX0.E1vQ9cn7vp9E67-w4Wi-PMtvCqs2DRySU27DfPSfSuk
+
+login=pepe
+&password=p
+&type=user
+
+###
+
+POST http://127.0.0.1:5000/api/user/authenticate
+content-type: application/x-www-form-urlencoded
+
+login=julia.ochoa
+&password=Hola1234
+
+###
+
+POST http://127.0.0.1:5000/api/user/authenticate-administrator
+content-type: application/x-www-form-urlencoded
+
+login=juan.canales
+&password=Hola1234
+
+###
+
+GET http://127.0.0.1:5000/api/users 
+Content-Type: application/x-www-form-urlencoded 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4uY2FuYWxlcyIsInJlbW90ZUFkZHJlc3MiOiI6OmZmZmY6MTI3LjAuMC4xIiwidHlwZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2Mjc0OTUzNTUsImV4cCI6MTYyNzU3OTM1NX0.E1vQ9cn7vp9E67-w4Wi-PMtvCqs2DRySU27DfPSfSuk
+
+###
+
+GET http://127.0.0.1:5000/api/user/759804a1-729d-46f2-a625-0882638ba38c
+Content-Type: application/x-www-form-urlencoded 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4uY2FuYWxlcyIsInJlbW90ZUFkZHJlc3MiOiI6OmZmZmY6MTI3LjAuMC4xIiwidHlwZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2Mjc0OTUzNTUsImV4cCI6MTYyNzU3OTM1NX0.E1vQ9cn7vp9E67-w4Wi-PMtvCqs2DRySU27DfPSfSuk
