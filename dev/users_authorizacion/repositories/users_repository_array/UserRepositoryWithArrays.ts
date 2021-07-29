@@ -1,4 +1,4 @@
-import { UuidGenerator } from "../../../utilities/UuidGenerator"
+import { UuidGenerator } from "../../../common/utilities/UuidGenerator"
 
 export class UserDto {
     constructor(
@@ -33,7 +33,7 @@ export class UserRepositoryWithArrays {
         const theUser = UserRepositoryWithArrays._users
             .filter((user: UserDto) => user.uuid === uuid)
 
-        if (theUser.length === 0) 
+        if (theUser.length === 0)
             return undefined
 
         return theUser[0]

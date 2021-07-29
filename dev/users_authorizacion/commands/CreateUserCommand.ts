@@ -1,20 +1,20 @@
-import { UserPersistenceError, UserPersistenceInterface } from '../../../domain/users_authorizacion/driven_ports/UserPersistence'
 import { CommandAbstract, CommandHandlerInterface } from '../../common/commands/Command'
 import { CommandBusError } from '../../common/commands/CommandBusInterface'
+import { UserPersistenceInterface, UserPersistenceError } from '../driven_ports/UserPersistence'
 
 export class CreateUserCommand extends CommandAbstract {
     public constructor(
-        public readonly uuid: string, 
-        public readonly login: string, 
+        public readonly uuid: string,
+        public readonly login: string,
         public readonly password: string,
-        public readonly type: string   
+        public readonly type: string
     ) {
         super('CreateUserCommand')
     }
 }
 
 export class CreateUserCommandHandler implements CommandHandlerInterface {
-    public constructor(private readonly _userPersistence: UserPersistenceInterface) {}
+    public constructor(private readonly _userPersistence: UserPersistenceInterface) { }
 
     public async handle(command: CreateUserCommand): Promise<void> {
         if (!(command instanceof CreateUserCommand)) {
@@ -36,5 +36,5 @@ export class CreateUserCommandHandler implements CommandHandlerInterface {
             }
             throw error
         }
-    } 
+    }
 }

@@ -1,5 +1,5 @@
-import { DomainEventHandlerInterface, DomainEventInterface } from "../../domain/common/events/DomainEvent"
-import { DomainEventBusInterface } from "../../domain/common/events/DomainEventBus"
+import { DomainEventHandlerInterface, DomainEventInterface } from "../events/DomainEvent"
+import { DomainEventBusInterface } from "../events/DomainEventBus"
 
 export class SynchronousEventBus implements DomainEventBusInterface {
     private _handlers = new Map<string, DomainEventHandlerInterface[]>()

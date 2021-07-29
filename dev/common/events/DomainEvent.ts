@@ -1,4 +1,4 @@
-import { TimeStampGenerator } from '../../../infraestructure/utilities/TimeStampGenerator'
+import { TimeStampGenerator } from "../utilities/TimeStampGenerator"
 
 export interface DomainEventInterface {
     name: string

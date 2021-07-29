@@ -1,7 +1,6 @@
-import { UserPersistenceError, UserPersistenceInterface } from '../../../domain/users_authorizacion/driven_ports/UserPersistence'
-import { UserServiceInterface } from '../../../domain/users_authorizacion/driving_ports/UserService'
 import { CommandAbstract, CommandHandlerInterface, CommandInterface } from '../../common/commands/Command'
 import { CommandBusError } from '../../common/commands/CommandBusInterface'
+import { UserPersistenceInterface, UserPersistenceError } from '../driven_ports/UserPersistence'
 
 export class OpenAdministratorSessionCommand extends CommandAbstract {
     constructor(

@@ -1,5 +1,5 @@
-import { CommandHandlerInterface, CommandInterface } from "../../application/common/commands/Command"
-import { CommandBusInterface, CommandBusError } from "../../application/common/commands/CommandBusInterface"
+import { CommandHandlerInterface, CommandInterface } from "../commands/Command"
+import { CommandBusInterface, CommandBusError } from "../commands/CommandBusInterface"
 
 class SynchronousCommandBus implements CommandBusInterface {
     private _handlers = new Map<string, CommandHandlerInterface>()
@@ -32,4 +32,4 @@ export class SynchronousCommandBusFactory {
 
         return SynchronousCommandBusFactory._commandBus
     }
-} 
+}

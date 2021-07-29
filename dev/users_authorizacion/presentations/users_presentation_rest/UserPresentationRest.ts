@@ -1,12 +1,13 @@
 // import bodyParser from "body-parser"
-    // @ts-ignore: Unreachable code error
+// @ts-ignore: Unreachable code error
 import express from "express"
 // @ts-ignore: Unreachable code error
 import cors from 'cors'
-import { UserServiceInterface } from "../../../../domain/users_authorizacion/driving_ports/UserService"
-import { User } from "../../../../domain/users_authorizacion/entities/User"
-import { TokenSessionUtility } from "../../../utilities/TokenSessionUtility"
-import { UuidGenerator } from "../../../utilities/UuidGenerator"
+import { TokenSessionUtility } from "../../../common/utilities/TokenSessionUtility"
+import { UuidGenerator } from "../../../common/utilities/UuidGenerator"
+import { UserServiceInterface } from "../../driving_ports/UserService"
+import { User } from "../../entities/User"
+
 
 export class UserRestWebService {
     private _app: express.Express
@@ -97,14 +98,14 @@ export class UserRestWebService {
             return
         }
     }
- 
+
     private async _sendUser(
         req: express.Request,
         res: express.Response,
         next: express.NextFunction
     ) {
         try {
-            const uuid: string = req.params.uuid        
+            const uuid: string = req.params.uuid
             const user = await this._userService.getUserByUuid(uuid)
 
             if (!user) {
@@ -131,9 +132,9 @@ export class UserRestWebService {
             const login: string = req.body.login
             const password: string = req.body.password
             const type: string = req.body.type
-            
+
             const uuid: string = UuidGenerator.generate()
-            
+
             await this._userService.createUser(uuid, login, password, type)
             res.status(201).send({ ok: true, result: { uuid } })
         } catch (error) {

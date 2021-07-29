@@ -1,7 +1,7 @@
-import { UserPersistenceError, UserPersistenceInterface } from '../../../domain/users_authorizacion/driven_ports/UserPersistence'
-import { User } from '../../../domain/users_authorizacion/entities/User'
 import { QueryBusError } from '../../common/queries/QueryBusInterface'
 import { QueryAbstract, QueryHandlerInterface } from '../../common/queries/Query'
+import { UserPersistenceInterface, UserPersistenceError } from '../driven_ports/UserPersistence'
+import { User } from '../entities/User'
 
 export class GetAllUsersQuery extends QueryAbstract {
     public constructor() {
@@ -10,7 +10,7 @@ export class GetAllUsersQuery extends QueryAbstract {
 }
 
 export class GetAllUsersQueryHandler implements QueryHandlerInterface {
-    public constructor(private _userPersistence: UserPersistenceInterface) {}
+    public constructor(private _userPersistence: UserPersistenceInterface) { }
 
     public async handle(query: GetAllUsersQuery): Promise<User[]> {
         if (!(query instanceof GetAllUsersQuery)) {

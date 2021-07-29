@@ -1,6 +1,5 @@
-
-import { UserPersistenceInterface } from '../../../../domain/users_authorizacion/driven_ports/UserPersistence'
-import { User } from '../../../../domain/users_authorizacion/entities/User'
+import { UserPersistenceInterface } from '../../driven_ports/UserPersistence'
+import { User } from '../../entities/User'
 import { UserRepositoryWithArrays, UserDto } from './UserRepositoryWithArrays'
 
 export class UserPersistenceAdapter implements UserPersistenceInterface {
@@ -19,7 +18,7 @@ export class UserPersistenceAdapter implements UserPersistenceInterface {
     public async retrieveUserByUuid(uuid: string): Promise<User | undefined> {
         const userDto = await UserRepositoryWithArrays.retrieveUserByUuid(uuid)
         if (!userDto)
-            return 
+            return
         const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type)
         return user
     }

@@ -1,11 +1,10 @@
-
-import { UserServiceInterface } from "../../../domain/users_authorizacion/driving_ports/UserService";
-import { User } from "../../../domain/users_authorizacion/entities/User";
 import { CommandBusInterface } from "../../common/commands/CommandBusInterface";
 import { QueryBusInterface } from "../../common/queries/QueryBusInterface";
 import { CreateUserCommand } from "../commands/CreateUserCommand";
 import { OpenAdministratorSessionCommand } from "../commands/OpenAdministratorSessionCommand";
 import { OpenUserSessionCommand } from "../commands/OpenUserSessionCommand";
+import { UserServiceInterface } from "../driving_ports/UserService";
+import { User } from "../entities/User";
 import { GetAllUsersQuery } from "../queries/GetAllUsersQuery";
 import { GetUserByUuidQuery } from "../queries/GetUserByUuidQuery";
 
