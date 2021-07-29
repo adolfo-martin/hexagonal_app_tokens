@@ -1,6 +1,6 @@
-import { UserPersistenceInterface } from '../../driven_ports/UserPersistence'
-import { User } from '../../entities/User'
-import { UserRepositoryWithArrays, UserDto } from './UserRepositoryWithArrays'
+import { UserPersistenceInterface } from '../ports/UserPersistence'
+import { User } from '../entities/User'
+import { UserRepositoryWithArrays, UserDto } from '../../UserRepositoryWithArrays'
 
 export class UserPersistenceAdapter implements UserPersistenceInterface {
     public async storeUser(uuid: string, login: string, password: string, type: string): Promise<void> {

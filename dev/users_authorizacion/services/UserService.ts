@@ -3,7 +3,7 @@ import { QueryBusInterface } from "../../common/queries/QueryBusInterface";
 import { CreateUserCommand } from "../commands/CreateUserCommand";
 import { OpenAdministratorSessionCommand } from "../commands/OpenAdministratorSessionCommand";
 import { OpenUserSessionCommand } from "../commands/OpenUserSessionCommand";
-import { UserServiceInterface } from "../driving_ports/UserService";
+import { UserServiceInterface } from "../ports/UserService";
 import { User } from "../entities/User";
 import { GetAllUsersQuery } from "../queries/GetAllUsersQuery";
 import { GetUserByUuidQuery } from "../queries/GetUserByUuidQuery";

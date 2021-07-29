@@ -1,6 +1,6 @@
 import { QueryAbstract, QueryHandlerInterface } from '../../common/queries/Query'
 import { QueryBusError } from '../../common/queries/QueryBusInterface'
-import { UserPersistenceInterface, UserPersistenceError } from '../driven_ports/UserPersistence'
+import { UserPersistenceInterface, UserPersistenceError } from '../ports/UserPersistence'
 import { User } from '../entities/User'
 
 export class GetUserByUuidQuery extends QueryAbstract {

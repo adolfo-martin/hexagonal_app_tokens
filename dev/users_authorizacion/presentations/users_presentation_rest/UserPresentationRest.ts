@@ -5,7 +5,7 @@ import express from "express"
 import cors from 'cors'
 import { TokenSessionUtility } from "../../../common/utilities/TokenSessionUtility"
 import { UuidGenerator } from "../../../common/utilities/UuidGenerator"
-import { UserServiceInterface } from "../../driving_ports/UserService"
+import { UserServiceInterface } from "../../ports/UserService"
 import { User } from "../../entities/User"
 
 

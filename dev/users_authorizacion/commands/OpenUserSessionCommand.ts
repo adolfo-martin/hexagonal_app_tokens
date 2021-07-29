@@ -1,6 +1,6 @@
 import { CommandAbstract, CommandHandlerInterface, CommandInterface } from '../../common/commands/Command'
 import { CommandBusError } from '../../common/commands/CommandBusInterface'
-import { UserPersistenceInterface, UserPersistenceError } from '../driven_ports/UserPersistence'
+import { UserPersistenceInterface, UserPersistenceError } from '../ports/UserPersistence'
 
 export class OpenUserSessionCommand extends CommandAbstract {
     constructor(

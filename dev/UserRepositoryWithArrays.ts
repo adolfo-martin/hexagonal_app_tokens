@@ -1,4 +1,4 @@
-import { UuidGenerator } from "../../../common/utilities/UuidGenerator"
+import { UuidGenerator } from "./common/utilities/UuidGenerator"
 
 export class UserDto {
     constructor(
