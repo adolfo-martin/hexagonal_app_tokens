@@ -1,5 +1,5 @@
-import { QueryHandlerInterface, QueryInterface } from "../queries/Query"
-import { QueryBusInterface, QueryBusError } from "../queries/QueryBusInterface"
+import { QueryHandlerInterface, QueryInterface } from '../queries/Query'
+import { QueryBusInterface, QueryBusError } from '../queries/QueryBusInterface'
 
 class SynchronousQueryBus implements QueryBusInterface {
     private _handlers = new Map<string, QueryHandlerInterface>()

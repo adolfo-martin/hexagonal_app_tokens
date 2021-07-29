@@ -1,7 +1,7 @@
-import { DomainEventHandlerInterface, DomainEventInterface } from "../events/DomainEvent"
-import { DomainEventBusInterface } from "../events/DomainEventBus"
+import { DomainEventHandlerInterface, DomainEventInterface } from '../events/DomainEvent'
+import { DomainEventBusInterface } from '../events/DomainEventBus'
 
-export class SynchronousEventBus implements DomainEventBusInterface {
+export class SynchronousDomainEventBus implements DomainEventBusInterface {
     private _handlers = new Map<string, DomainEventHandlerInterface[]>()
 
     public register(eventName: string, handler: DomainEventHandlerInterface): void {

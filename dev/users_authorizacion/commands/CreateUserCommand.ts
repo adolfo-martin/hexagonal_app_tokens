@@ -1,5 +1,8 @@
 import { CommandAbstract, CommandHandlerInterface } from '../../common/commands/Command'
 import { CommandBusError } from '../../common/commands/CommandBusInterface'
+import { DomainEventBusInterface } from '../../common/events/DomainEventBus'
+import { User } from '../entities/User'
+import { UserCreatedDomainEvent } from '../events/UserCreatedDomainEvent'
 import { UserPersistenceInterface, UserPersistenceError } from '../ports/UserPersistence'
 
 export class CreateUserCommand extends CommandAbstract {
@@ -14,7 +17,10 @@ export class CreateUserCommand extends CommandAbstract {
 }
 
 export class CreateUserCommandHandler implements CommandHandlerInterface {
-    public constructor(private readonly _userPersistence: UserPersistenceInterface) { }
+    public constructor(
+        private readonly _userPersistence: UserPersistenceInterface,
+        private readonly _domainEventBus: DomainEventBusInterface
+    ) { }
 
     public async handle(command: CreateUserCommand): Promise<void> {
         if (!(command instanceof CreateUserCommand)) {
@@ -28,8 +34,10 @@ export class CreateUserCommandHandler implements CommandHandlerInterface {
         }
 
         try {
-            const user = await this._userPersistence.storeUser(uuid, login, password, type)
-            return user
+            await this._userPersistence.storeUser(uuid, login, password, type)
+            const user = new User(uuid, login, password, type)
+            this._domainEventBus.dispatch(new UserCreatedDomainEvent(user.uuid, user))
+            return 
         } catch (error) {
             if (error instanceof UserPersistenceError) {
                 throw new CommandBusError(error.message)

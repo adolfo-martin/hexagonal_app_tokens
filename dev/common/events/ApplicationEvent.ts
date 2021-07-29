@@ -1,13 +1,12 @@
 import { TimeStampGenerator } from "../utilities/TimeStampGenerator"
 
-export interface DomainEventInterface {
+export interface ApplicationEventInterface {
     name: string
     timeStamp: number
     agregateId: string
     data: [string, any][]
 }
-
-export abstract class DomainEventAbstract implements DomainEventInterface {
+export abstract class ApplicationEventAbstract implements ApplicationEventInterface {
     public readonly timeStamp: number
 
     public constructor(
@@ -19,6 +18,6 @@ export abstract class DomainEventAbstract implements DomainEventInterface {
     }
 }
 
-export interface DomainEventHandlerInterface {
-    handle(event: DomainEventInterface): Promise<void>
+export interface ApplicationEventHandlerInterface {
+    handle(event: ApplicationEventInterface): Promise<void>
 }

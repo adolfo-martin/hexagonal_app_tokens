@@ -1,5 +1,5 @@
-import { CommandHandlerInterface, CommandInterface } from "../commands/Command"
-import { CommandBusInterface, CommandBusError } from "../commands/CommandBusInterface"
+import { CommandHandlerInterface, CommandInterface } from '../commands/Command'
+import { CommandBusInterface, CommandBusError } from '../commands/CommandBusInterface'
 
 class SynchronousCommandBus implements CommandBusInterface {
     private _handlers = new Map<string, CommandHandlerInterface>()

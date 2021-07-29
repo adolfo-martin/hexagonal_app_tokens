@@ -1,12 +1,13 @@
-// import bodyParser from "body-parser"
+// import bodyParser from 'body-parser'
 // @ts-ignore: Unreachable code error
-import express from "express"
+import express from 'express'
 // @ts-ignore: Unreachable code error
 import cors from 'cors'
-import { TokenSessionUtility } from "../../../common/utilities/TokenSessionUtility"
-import { UuidGenerator } from "../../../common/utilities/UuidGenerator"
-import { UserServiceInterface } from "../../ports/UserService"
-import { User } from "../../entities/User"
+import { TokenSessionUtility } from '../../common/utilities/TokenSessionUtility'
+import { UuidGenerator } from '../../common/utilities/UuidGenerator'
+import { User } from '../entities/User'
+import { UserServiceInterface } from '../ports/UserService'
+
 
 
 export class UserRestWebService {
