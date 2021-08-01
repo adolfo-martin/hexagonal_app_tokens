@@ -8,9 +8,9 @@ GET http://127.0.0.1:5000/api/user/759804a1-729d-46f2-a625-0882638ba38c
 
 POST http://127.0.0.1:5000/api/user
 content-type: application/x-www-form-urlencoded
-Authorization: Bearer ayJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4uY2FuYWxlcyIsInJlbW90ZUFkZHJlc3MiOiI6OmZmZmY6MTI3LjAuMC4xIiwidHlwZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2Mjc1NzYzNTQsImV4cCI6MTYyNzY2MDM1NH0.rBmuXKVg5et3TrVXiAQ4836q8CKNSqnuw_sxU0Chb50
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4ucmFtw61yZXoiLCJyZW1vdGVBZGRyZXNzIjoiOjpmZmZmOjEyNy4wLjAuMSIsInR5cGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjI3NzQzODc1LCJleHAiOjE2Mjc4Mjc4NzV9.CC0WadpO-g4824kz8ntCG9EHAqGJsi4TOIN_h7kvvuw
 
-login=pepe
+login=jose
 &password=p
 &type=user
 
@@ -27,7 +27,7 @@ login=julia.ochoa
 POST http://127.0.0.1:5000/api/user/authenticate-administrator
 content-type: application/x-www-form-urlencoded
 
-login=juan.canales
+login=juan.ramírez
 &password=Hola1234
 
 ###

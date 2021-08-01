@@ -1,16 +1,20 @@
 import { CommandAbstract, CommandHandlerInterface } from '../../common/commands/Command'
 import { CommandBusError } from '../../common/commands/CommandBusInterface'
 import { DomainEventBusInterface } from '../../common/events/DomainEventBus'
+import { Client } from '../entities/Client'
 import { User } from '../entities/User'
 import { UserCreatedDomainEvent } from '../events/UserCreatedDomainEvent'
 import { UserPersistenceInterface, UserPersistenceError } from '../ports/UserPersistence'
 
 export class CreateUserCommand extends CommandAbstract {
     public constructor(
-        public readonly uuid: string,
+        public readonly userUuid: string,
         public readonly login: string,
         public readonly password: string,
-        public readonly type: string
+        public readonly type: string,
+        public readonly clientUuid: string,
+        public readonly firstName: string,
+        public readonly lastName: string,
     ) {
         super('CreateUserCommand')
     }
@@ -27,15 +31,17 @@ export class CreateUserCommandHandler implements CommandHandlerInterface {
             throw new CommandBusError('CreateUserCommandHandler can only execute CreateUserCommand')
         }
 
-        const { uuid, login, password, type } = command
+        const { userUuid, login, password, type, clientUuid, firstName, lastName } = command
 
-        if (!uuid || !login || !password || !type) {
-            throw new CommandBusError('CreateUserCommand: uuid, login, password or type is missing')
+        if (!userUuid || !login || !password || !type || !clientUuid || !firstName || !lastName) {
+            throw new CommandBusError('CreateUserCommand: userUuid, login, password, type, clientUuid, firstName or lastName is missing')
         }
 
         try {
-            await this._userPersistence.storeUser(uuid, login, password, type)
-            const user = new User(uuid, login, password, type)
+            await this._userPersistence.storeUser(userUuid, login, password, type)
+            await this._userPersistence.storeClient(clientUuid, firstName, lastName, userUuid)
+            const user = new User(userUuid, login, password, type)
+            const client = new Client(clientUuid, firstName, lastName, userUuid)
             this._domainEventBus.dispatch(new UserCreatedDomainEvent(user.uuid, user))
             return 
         } catch (error) {

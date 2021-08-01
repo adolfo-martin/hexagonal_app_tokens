@@ -1,10 +1,12 @@
-import { UserPersistenceInterface } from '../ports/UserPersistence'
 import { User } from '../entities/User'
-import { UserRepositoryWithArrays, UserDto } from '../../UserRepositoryWithArrays'
+import { UserRepositoryWithArrays, UserDto, ClientDto } from '../../UserRepositoryWithArrays'
+import { UserPersistenceInterface } from '../ports/UserPersistence'
+import { Client } from '../entities/Client'
 
 export class UserPersistenceAdapter implements UserPersistenceInterface {
-    public async storeUser(uuid: string, login: string, password: string, type: string): Promise<void> {
-        const userDto = new UserDto(uuid, login, password, type)
+
+    public async storeUser(userUuid: string, login: string, password: string, type: string): Promise<void> {
+        const userDto = new UserDto(userUuid, login, password, type)
         await UserRepositoryWithArrays.storeUser(userDto)
         return undefined
     }
@@ -29,5 +31,23 @@ export class UserPersistenceAdapter implements UserPersistenceInterface {
             return
         const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type)
         return user
+    }
+
+    public async storeClient(clientUuid: string, firstName: string, lastName: string, userUuid: string): Promise<void> {
+        const clientDto = new ClientDto(clientUuid, firstName, lastName, userUuid)
+        await UserRepositoryWithArrays.storeClient(clientDto)
+        return undefined
+    }
+
+    public async retrieveAllClients(): Promise<Client[]> {
+        throw new Error('Method not implemented.')
+    }
+
+    public async retrieveClientByUuid(uuid: string): Promise<Client | undefined> {
+        throw new Error('Method not implemented.')
+    }
+
+    public async retrieveClientByLoginAndPassword(login: string, password: string): Promise<Client | undefined> {
+        throw new Error('Method not implemented.')
     }
 }

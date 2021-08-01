@@ -133,11 +133,14 @@ export class UserRestWebService {
             const login: string = req.body.login
             const password: string = req.body.password
             const type: string = req.body.type
+            const firstName: string = 'José María'
+            const lastName: string = 'Jiménez'
 
-            const uuid: string = UuidGenerator.generate()
+            const userUuid: string = UuidGenerator.generate()
+            const clientUuid: string = UuidGenerator.generate()
 
-            await this._userService.createUser(uuid, login, password, type)
-            res.status(201).send({ ok: true, result: { uuid } })
+            await this._userService.createUser(userUuid, login, password, type, clientUuid, firstName, lastName)
+            res.status(201).send({ ok: true, result: { uuid: userUuid } })
         } catch (error) {
             res.status(401).send({ ok: false, result: { error: error.message } })
             return

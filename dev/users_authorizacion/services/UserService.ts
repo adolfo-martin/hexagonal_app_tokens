@@ -26,8 +26,8 @@ export class UserService implements UserServiceInterface {
         return user
     }
 
-    public async createUser(uuid: string, login: string, password: string, type: string): Promise<void> {
-        await this._commandBus.execute(new CreateUserCommand(uuid, login, password, type))
+    public async createUser(userUuid: string, login: string, password: string, type: string, clientUuid: string, firstName: string, lastName: string): Promise<void> {
+        await this._commandBus.execute(new CreateUserCommand(userUuid, login, password, type, clientUuid, firstName, lastName))
     }
 
     public async openUserSession(login: string, password: string): Promise<string> {
