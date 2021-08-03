@@ -3,7 +3,9 @@ export class User {
         public readonly uuid: string,
         public readonly login: string,
         public readonly password: string,
-        public readonly type: string) {
+        public readonly type: string,
+        public readonly clientUuid: string,
+    ) {
     }
 
     private _isStrongPassword(password: string): boolean {

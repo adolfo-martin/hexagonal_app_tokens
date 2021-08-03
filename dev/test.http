@@ -2,17 +2,19 @@ GET http://127.0.0.1:5000/api/users
 
 ###
 
-GET http://127.0.0.1:5000/api/user/759804a1-729d-46f2-a625-0882638ba38c
+GET http://127.0.0.1:5000/api/user/6c96641e-fbba-47ab-bd7d-8c71ddc1e9a4
 
 ###
 
 POST http://127.0.0.1:5000/api/user
 content-type: application/x-www-form-urlencoded
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4ucmFtw61yZXoiLCJyZW1vdGVBZGRyZXNzIjoiOjpmZmZmOjEyNy4wLjAuMSIsInR5cGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjI3NzQzODc1LCJleHAiOjE2Mjc4Mjc4NzV9.CC0WadpO-g4824kz8ntCG9EHAqGJsi4TOIN_h7kvvuw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4ucmFtw61yZXoiLCJyZW1vdGVBZGRyZXNzIjoiOjpmZmZmOjEyNy4wLjAuMSIsInR5cGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjI3OTEwMDE2LCJleHAiOjE2Mjc5OTQwMTZ9.97-MpdpKJT8CyeZqRZ5lv1vVgW7TEpIRJw_8fVoPf90
 
-login=jose
-&password=p
+login=josemaria.jimenez
+&password=jmj1234
 &type=user
+&first-name=José María
+&last-name=Jiménez
 
 ###
 
@@ -34,10 +36,10 @@ login=juan.ramírez
 
 GET http://127.0.0.1:5000/api/users 
 Content-Type: application/x-www-form-urlencoded 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4uY2FuYWxlcyIsInJlbW90ZUFkZHJlc3MiOiI6OmZmZmY6MTI3LjAuMC4xIiwidHlwZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2Mjc0OTUzNTUsImV4cCI6MTYyNzU3OTM1NX0.E1vQ9cn7vp9E67-w4Wi-PMtvCqs2DRySU27DfPSfSuk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4ucmFtw61yZXoiLCJyZW1vdGVBZGRyZXNzIjoiOjpmZmZmOjEyNy4wLjAuMSIsInR5cGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjI3ODkyNDUzLCJleHAiOjE2Mjc5NzY0NTN9.mIpcf84ezh8wqvHtCfwi0VXXp4LV0qHZR-LPTkAJMeA
 
 ###
 
-GET http://127.0.0.1:5000/api/user/759804a1-729d-46f2-a625-0882638ba38c
+GET http://127.0.0.1:5000/api/user/6c96641e-fbba-47ab-bd7d-8c71ddc1e9a4
 Content-Type: application/x-www-form-urlencoded 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4uY2FuYWxlcyIsInJlbW90ZUFkZHJlc3MiOiI6OmZmZmY6MTI3LjAuMC4xIiwidHlwZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2Mjc1NzYzNTQsImV4cCI6MTYyNzY2MDM1NH0.rBmuXKVg5et3TrVXiAQ4836q8CKNSqnuw_sxU0Chb50
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Imp1YW4ucmFtw61yZXoiLCJyZW1vdGVBZGRyZXNzIjoiOjpmZmZmOjEyNy4wLjAuMSIsInR5cGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjI3OTEwMDE2LCJleHAiOjE2Mjc5OTQwMTZ9.97-MpdpKJT8CyeZqRZ5lv1vVgW7TEpIRJw_8fVoPf90

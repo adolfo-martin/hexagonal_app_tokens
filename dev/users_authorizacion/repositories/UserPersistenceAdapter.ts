@@ -1,6 +1,6 @@
 import { User } from '../entities/User'
 import { UserRepositoryWithArrays, UserDto, ClientDto } from '../../UserRepositoryWithArrays'
-import { UserPersistenceInterface } from '../ports/UserPersistence'
+import { UserPersistenceError, UserPersistenceInterface } from '../ports/UserPersistence'
 import { Client } from '../entities/Client'
 
 export class UserPersistenceAdapter implements UserPersistenceInterface {
@@ -11,17 +11,28 @@ export class UserPersistenceAdapter implements UserPersistenceInterface {
         return undefined
     }
 
+    private async convertUserDtoToUser(userDto: UserDto): Promise<User> {
+        const clientDto = await UserRepositoryWithArrays.retrieveClientByUserUuid(userDto.uuid)
+        if (!clientDto)
+            throw new UserPersistenceError(`There is not client associated with user with uuid ${userDto.uuid}`)
+        const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type, clientDto?.uuid)
+        return user
+    }
+
     public async retrieveAllUsers(): Promise<User[]> {
         const usersDto = await UserRepositoryWithArrays.retrieveAllUsers()
-        const users = usersDto.map(userDto => new User(userDto.uuid, userDto.login, userDto.password, userDto.type))
-        return users
+        const users = usersDto.map(userDto => this.convertUserDtoToUser(userDto))
+        return Promise.all(users)
     }
 
     public async retrieveUserByUuid(uuid: string): Promise<User | undefined> {
         const userDto = await UserRepositoryWithArrays.retrieveUserByUuid(uuid)
         if (!userDto)
             return
-        const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type)
+        const clientDto = await UserRepositoryWithArrays.retrieveClientByUserUuid(uuid)
+        if (!clientDto)
+            throw new UserPersistenceError(`There is not client associated with user with uuid ${uuid}`)
+        const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type, clientDto?.uuid)
         return user
     }
 
@@ -29,7 +40,10 @@ export class UserPersistenceAdapter implements UserPersistenceInterface {
         const userDto = await UserRepositoryWithArrays.retrieveUserByLoginPassword(login, password)
         if (!userDto)
             return
-        const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type)
+        const clientDto = await UserRepositoryWithArrays.retrieveClientByUserUuid(userDto.uuid)
+        if (!clientDto)
+            throw new UserPersistenceError(`There is not client associated with user with uuid ${userDto.uuid}`)
+        const user = new User(userDto.uuid, userDto.login, userDto.password, userDto.type, clientDto?.uuid)
         return user
     }
 
@@ -44,7 +58,11 @@ export class UserPersistenceAdapter implements UserPersistenceInterface {
     }
 
     public async retrieveClientByUuid(uuid: string): Promise<Client | undefined> {
-        throw new Error('Method not implemented.')
+        const clientDto = await UserRepositoryWithArrays.retrieveClientByUuid(uuid)
+        if (!clientDto)
+            return
+        const client = new Client(clientDto.uuid, clientDto.firstName, clientDto.lastName)
+        return client
     }
 
     public async retrieveClientByLoginAndPassword(login: string, password: string): Promise<Client | undefined> {

@@ -7,6 +7,8 @@ import { UserServiceInterface } from "../ports/UserService";
 import { User } from "../entities/User";
 import { GetAllUsersQuery } from "../queries/GetAllUsersQuery";
 import { GetUserByUuidQuery } from "../queries/GetUserByUuidQuery";
+import { GetClientByUuidQuery } from "../queries/GetClientByUuidQuery";
+import { Client } from "../entities/Client";
 
 
 export class UserService implements UserServiceInterface {
@@ -26,8 +28,14 @@ export class UserService implements UserServiceInterface {
         return user
     }
 
+    public async getClientByUuid(uuid: string): Promise<Client | undefined> {
+        const client: Client = await this._queryBus.execute(new GetClientByUuidQuery(uuid))
+        return client
+    }
+
     public async createUser(userUuid: string, login: string, password: string, type: string, clientUuid: string, firstName: string, lastName: string): Promise<void> {
         await this._commandBus.execute(new CreateUserCommand(userUuid, login, password, type, clientUuid, firstName, lastName))
+        return
     }
 
     public async openUserSession(login: string, password: string): Promise<string> {

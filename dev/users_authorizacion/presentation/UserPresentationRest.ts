@@ -107,8 +107,8 @@ export class UserRestWebService {
     ) {
         try {
             const uuid: string = req.params.uuid
-            const user = await this._userService.getUserByUuid(uuid)
 
+            const user = await this._userService.getUserByUuid(uuid)            
             if (!user) {
                 res.status(404).send({
                     ok: false,
@@ -117,7 +117,16 @@ export class UserRestWebService {
                 return
             }
 
-            res.status(200).send({ ok: true, result: { user } })
+            const client = await this._userService.getClientByUuid(user?.clientUuid)
+            if (!client) {
+                res.status(404).send({
+                    ok: false,
+                    result: { error: `Cannot get client with uuid ${user.clientUuid}.` },
+                })
+                return
+            }
+
+            res.status(200).send({ ok: true, result: { user, client } })
         } catch (error) {
             res.status(401).send({ ok: false, result: { error: error.message } })
             return
@@ -133,8 +142,8 @@ export class UserRestWebService {
             const login: string = req.body.login
             const password: string = req.body.password
             const type: string = req.body.type
-            const firstName: string = 'José María'
-            const lastName: string = 'Jiménez'
+            const firstName: string = req.body['first-name']
+            const lastName: string = req.body['last-name']
 
             const userUuid: string = UuidGenerator.generate()
             const clientUuid: string = UuidGenerator.generate()
@@ -253,8 +262,6 @@ export class UserRestWebService {
     ) {
         const data = TokenSessionUtility.decodeToken(res.locals.token)
 
-        // @ts-ignore: Unreachable code error
-        console.log('###################', data.type)
         // @ts-ignore: Unreachable code error
         const userType: string = data.type
         if (userType !== 'administrator') {

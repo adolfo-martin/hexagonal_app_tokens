@@ -7,11 +7,13 @@ import { QueryBusInterface } from './common/queries/QueryBusInterface'
 import { CreateUserCommand, CreateUserCommandHandler } from './users_authorizacion/commands/CreateUserCommand'
 import { OpenAdministratorSessionCommand, OpenAdministratorSessionCommandHandler } from './users_authorizacion/commands/OpenAdministratorSessionCommand'
 import { OpenUserSessionCommand, OpenUserSessionCommandHandler } from './users_authorizacion/commands/OpenUserSessionCommand'
+import { ClientCreatedDomainEvent, ClientCreatedDomainEventHandler } from './users_authorizacion/events/ClientCreatedDomainEvent'
 import { UserCreatedDomainEvent, UserCreatedDomainEventHandler } from './users_authorizacion/events/UserCreatedDomainEvent'
 import { UserPersistenceInterface } from './users_authorizacion/ports/UserPersistence'
 import { UserServiceInterface } from './users_authorizacion/ports/UserService'
 import { UserRestWebService } from './users_authorizacion/presentation/UserPresentationRest'
 import { GetAllUsersQuery, GetAllUsersQueryHandler } from './users_authorizacion/queries/GetAllUsersQuery'
+import { GetClientByUuidQuery, GetClientByUuidQueryHandler } from './users_authorizacion/queries/GetClientByUuidQuery'
 import { GetUserByUuidQuery, GetUserByUuidQueryHandler } from './users_authorizacion/queries/GetUserByUuidQuery'
 import { UserPersistenceAdapter } from './users_authorizacion/repositories/UserPersistenceAdapter'
 import { UserService } from './users_authorizacion/services/UserService'
@@ -47,6 +49,11 @@ class Application {
             new GetUserByUuidQueryHandler(this._userPersistence)
         )
 
+        this._queryBus.register(
+            GetClientByUuidQuery.name,
+            new GetClientByUuidQueryHandler(this._userPersistence)
+        )
+
         this._commandBus.register(
             CreateUserCommand.name,
             new CreateUserCommandHandler(this._userPersistence, this._domainEventBus)
@@ -63,6 +70,7 @@ class Application {
         )
 
         this._domainEventBus.register(UserCreatedDomainEvent.name, new UserCreatedDomainEventHandler())
+        this._domainEventBus.register(ClientCreatedDomainEvent.name, new ClientCreatedDomainEventHandler())
     }
 }
 

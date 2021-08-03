@@ -3,6 +3,7 @@ import { CommandBusError } from '../../common/commands/CommandBusInterface'
 import { DomainEventBusInterface } from '../../common/events/DomainEventBus'
 import { Client } from '../entities/Client'
 import { User } from '../entities/User'
+import { ClientCreatedDomainEvent } from '../events/ClientCreatedDomainEvent'
 import { UserCreatedDomainEvent } from '../events/UserCreatedDomainEvent'
 import { UserPersistenceInterface, UserPersistenceError } from '../ports/UserPersistence'
 
@@ -40,9 +41,10 @@ export class CreateUserCommandHandler implements CommandHandlerInterface {
         try {
             await this._userPersistence.storeUser(userUuid, login, password, type)
             await this._userPersistence.storeClient(clientUuid, firstName, lastName, userUuid)
-            const user = new User(userUuid, login, password, type)
-            const client = new Client(clientUuid, firstName, lastName, userUuid)
+            const user = new User(userUuid, login, password, type, clientUuid)
+            const client = new Client(clientUuid, firstName, lastName)
             this._domainEventBus.dispatch(new UserCreatedDomainEvent(user.uuid, user))
+            this._domainEventBus.dispatch(new ClientCreatedDomainEvent(user.uuid, client))
             return 
         } catch (error) {
             if (error instanceof UserPersistenceError) {

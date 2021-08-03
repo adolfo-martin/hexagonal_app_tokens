@@ -101,4 +101,11 @@ export class UserRepositoryWithArrays {
         UserRepositoryWithArrays._clients.push(client)
         return
     }
+
+    static async retrieveClientByUserUuid(userUuid: string): Promise<ClientDto | undefined> {
+        const clients = UserRepositoryWithArrays._clients
+            .filter((client: ClientDto) => client.userUuid === userUuid)
+
+        return clients.length === 0 ? undefined : clients[0]
+    }
 }
